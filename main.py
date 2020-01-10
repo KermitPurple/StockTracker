@@ -4,10 +4,20 @@ from datetime import date
 def get_data():
     print("Getting Data ..." , end  = " ")
     tags = ["TSLA", "MJNA", "PLUG"]
+    companies = ["Tesla, Inc.", "Medical Marijuana, Inc.", "Plug Power Inc."]
+    num_of_shares = [8, 16851, 1000]
     big_list = [[f"date: {date.today()}","Company","Tag","Price","Number of Shares","total"]]
-    for i, tag in enumerate(tags):
-        inner_list = [str(i) + '1',str(i) + '2',str(i) + '3',str(i) + '4',]
+    gtotal = 0
+    for i in range(len(tags)):
+        tag = tags[i]
+        company = companies[i]
+        shares = num_of_shares[i]
+        price = 0
+        total = shares * price
+        gtotal += total
+        inner_list = ["", company, tag, price, shares, total]
         big_list.append(inner_list)
+    big_list.append(["","","","","Grand Total:", gtotal])
     print("Complete")
     return big_list
 
