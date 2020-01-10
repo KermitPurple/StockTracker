@@ -1,9 +1,10 @@
 from openpyxl import load_workbook
+from datetime import date
 
 def get_data():
     print("Getting Data ..." , end  = " ")
     tags = ["TSLA", "MJNA", "PLUG"]
-    big_list = [["date","Company","Tag","Price","Number of Shares","total"]]
+    big_list = [[f"date: {date.today()}","Company","Tag","Price","Number of Shares","total"]]
     for i, tag in enumerate(tags):
         inner_list = [str(i) + '1',str(i) + '2',str(i) + '3',str(i) + '4',]
         big_list.append(inner_list)
