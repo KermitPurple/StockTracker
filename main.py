@@ -7,9 +7,8 @@ def get_data():
     tags = ["TSLA", "MJNA", "PLUG"]
     companies = ["Tesla, Inc.", "Medical Marijuana, Inc.", "Plug Power Inc."]
     num_of_shares = [8, 16985, 261]
-    big_list = [[f"Date: {date.today()}","Company","Tag","Price","Number of Shares","Total"]]
+    big_list = [[" "],[f"Date: {date.today()}","Company","Tag","Price","Number of Shares","Total"]]
     gtotal = 0
-    big_list.append([" "])
     for i in range(len(tags)):
         tag = tags[i]
         print(f"\tGetting {tag}")
