@@ -9,6 +9,7 @@ def get_data():
     num_of_shares = [8, 16985, 261]
     big_list = [[f"Date: {date.today()}","Company","Tag","Price","Number of Shares","Total"]]
     gtotal = 0
+    big_list.append([""])
     for i in range(len(tags)):
         tag = tags[i]
         print(f"\tGetting {tag}")
@@ -20,7 +21,6 @@ def get_data():
         inner_list = ["", company, tag, price, shares, total]
         big_list.append(inner_list)
     big_list.append(["","","","","Grand Total:", gtotal])
-    big_list.append([""])
     print("Complete!")
     return big_list
 
