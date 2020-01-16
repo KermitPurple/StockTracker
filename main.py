@@ -15,6 +15,7 @@ def get_data():
         company = companies[i]
         shares = num_of_shares[i]
         price = YahooFinancials(tag).get_current_price()
+        print(f"\t{company} stock price: {price}\n")
         total = shares * price
         gtotal += total
         inner_list = ["", company, tag, price, shares, total]
