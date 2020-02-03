@@ -17,7 +17,7 @@ def dateRange(start, end):
 
 def getData():
     startdate = date.fromisoformat("2020-01-06")
-    enddate = datetime.now().date() + timedelta(days=1)
+    enddate = datetime.now().date()
     dates = dateRange(startdate, enddate)
     datalist = [["Date", "Tag", "Company", "Shares", "Price", "Total",
         "Date", "Tag", "Company", "Shares", "Price", "Total",
@@ -29,8 +29,6 @@ def getData():
             start=startdate.isoformat(),
             end=enddate.isoformat(),
             group_by="ticker")
-    print(data)
-    system("pause")
     for i in range(len(data[tags[0]]["High"])):
         grandtotal = 0
         datalist.append([])
@@ -64,3 +62,4 @@ def exportData(datalist):
 dta = getData()
 printdata(dta)
 exportData(dta)
+system("History.xlsx")
