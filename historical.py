@@ -1,10 +1,18 @@
 from openpyxl import load_workbook
-from datetime import date
+from datetime import date, timedelta
 import yfinance as yf
+
+def dateRange(start, end):
+    dates = []
+    for i in range((end-start).days + 1):
+        dates.append(start + timedelta(days=i))
+    return dates
+
 
 def getData():
     startdate = date.fromisoformat("2020-01-06")
     enddate = date.fromisoformat("2020-01-31")
+    dates = dateRange(startdate, enddate)
     datalist = [["Date", "Tag", "Company", "Shares", "Price", "Total",
         "Date", "Tag", "Company", "Shares", "Price", "Total",
         "Date", "Tag", "Company", "Shares", "Price", "Total", "Grand Total"]]
