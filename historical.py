@@ -1,17 +1,23 @@
-from openpyxl import load_workbook
-from datetime import date, timedelta
+from openpyxl import Workbook
+from datetime import date, timedelta, datetime
 import yfinance as yf
+from os import system
 
 def dateRange(start, end):
     dates = []
     for i in range((end-start).days + 1):
-        dates.append(start + timedelta(days=i))
+        dt = start + timedelta(days=i)
+        data = yf.download("TSLA",
+                start=dt.isoformat(),
+                end=dt.isoformat(),
+                group_by="ticker")
+        if len(data) != 0:
+            dates.append(dt)
     return dates
-
 
 def getData():
     startdate = date.fromisoformat("2020-01-06")
-    enddate = date.fromisoformat("2020-01-31")
+    enddate = datetime.now().date() + timedelta(days=1)
     dates = dateRange(startdate, enddate)
     datalist = [["Date", "Tag", "Company", "Shares", "Price", "Total",
         "Date", "Tag", "Company", "Shares", "Price", "Total",
@@ -23,14 +29,16 @@ def getData():
             start=startdate.isoformat(),
             end=enddate.isoformat(),
             group_by="ticker")
-    for i in range(len(data[tags[0]]["Open"])):
+    print(data)
+    system("pause")
+    for i in range(len(data[tags[0]]["High"])):
         grandtotal = 0
         datalist.append([])
         for j in range(len(tags)):
-            price = data[tags[j]]["Open"][i]
+            price = data[tags[j]]["High"][i]
             total = price * num_of_shares[j]
             grandtotal += total
-            datalist[i + 1].append("insert date")
+            datalist[i + 1].append(dates[i])
             datalist[i + 1].append(tags[j])
             datalist[i + 1].append(companies[j])
             datalist[i + 1].append(num_of_shares[j])
@@ -44,7 +52,15 @@ def printdata(datalist):
         for j in range(len(datalist[i])):
             print(datalist[i][j], end =" ")
         print()
+
+def exportData(datalist):
+    wb = Workbook()
+    ws = wb.active
+    for i in range(len(datalist)):
+        ws.append(datalist[i])
+    wb.save("History.xlsx")
     
         
-
-printdata(getData())
+dta = getData()
+printdata(dta)
+exportData(dta)
