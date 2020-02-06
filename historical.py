@@ -20,8 +20,8 @@ def getData():
     enddate = datetime.now().date()
     dates = dateRange(startdate, enddate)
     datalist = [["Date", "Tag", "Company", "Shares", "Price", "Total",
-        "Date", "Tag", "Company", "Shares", "Price", "Total",
-        "Date", "Tag", "Company", "Shares", "Price", "Total", "Grand Total"]]
+         "Tag", "Company", "Shares", "Price", "Total",
+         "Tag", "Company", "Shares", "Price", "Total", "Grand Total"]]
     tags = ["TSLA", "MJNA", "PLUG"]
     companies = ["Tesla, Inc.", "Medical Marijuana, Inc.", "Plug Power Inc."]
     num_of_shares = [8, 16985, 261]
@@ -32,11 +32,11 @@ def getData():
     for i in range(len(data[tags[0]]["High"])):
         grandtotal = 0
         datalist.append([])
+        datalist[i + 1].append(dates[i])
         for j in range(len(tags)):
             price = data[tags[j]]["High"][i]
             total = price * num_of_shares[j]
             grandtotal += total
-            datalist[i + 1].append(dates[i])
             datalist[i + 1].append(tags[j])
             datalist[i + 1].append(companies[j])
             datalist[i + 1].append(num_of_shares[j])
