@@ -7,7 +7,7 @@ def dateRange(start, end):
     dates = []
     for i in range((end-start).days + 1):
         dt = start + timedelta(days=i)
-        data = yf.download("TSLA",
+        data = yf.download("BNED",
                 start=dt.isoformat(),
                 end=dt.isoformat(),
                 group_by="ticker")
@@ -16,16 +16,18 @@ def dateRange(start, end):
     return dates
 
 def getData():
-    startdate = date.fromisoformat("2020-01-06")
+    startdate = date.fromisoformat("2020-02-10")
     enddate = datetime.now().date()
     dates = dateRange(startdate, enddate)
     datalist = [["Date", "Tag", "Company", "Shares", "Price", "Total",
          "Tag", "Company", "Shares", "Price", "Total",
+         "Tag", "Company", "Shares", "Price", "Total",
+         "Tag", "Company", "Shares", "Price", "Total",
          "Tag", "Company", "Shares", "Price", "Total", "Grand Total"]]
-    tags = ["TSLA", "MJNA", "PLUG"]
-    companies = ["Tesla, Inc.", "Medical Marijuana, Inc.", "Plug Power Inc."]
-    num_of_shares = [8, 16985, 261]
-    data = yf.download(tags[0] + " " + tags[1] + " " + tags[2],
+    tags = ["IMCX.CN", "REKR", "PLUG", "BNED", "TOMZ"]
+    companies = ["IMCX company name", "REKR company name", "Plug Power Inc.", "Barnes and Noble", "TOMI Environmental Solutions, Inc."]
+    num_of_shares = [948, 175, 150, 100, 2389]
+    data = yf.download(tags[0] + " " + tags[1] + " " + tags[2] + " " + tags[3] + " " + tags[4],
             start=startdate.isoformat(),
             end=enddate.isoformat(),
             group_by="ticker")
@@ -60,6 +62,6 @@ def exportData(datalist):
     
         
 dta = getData()
-printdata(dta)
+#printdata(dta)
 exportData(dta)
 system("History.xlsx")
